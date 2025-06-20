@@ -3,7 +3,7 @@ from tkinter import filedialog, messagebox, scrolledtext
 from optimizer import minimize_cost
 
 
-# --- File parsing logic ---
+# pasre uploaded files
 def parse_prices(path):
     prices = {}
     with open(path, 'r') as f:
@@ -43,7 +43,7 @@ def parse_promotions(path):
             promotions.append({'items': promo, 'price': promo_price})
     return promotions
 
-# --- UI logic ---
+# tkinter ui
 class App:
     def __init__(self, root):
         self.root = root
@@ -53,14 +53,12 @@ class App:
         self.price_path = ""
         self.promo_path = ""
 
-        # Buttons
         tk.Button(root, text="Upload input.txt", command=self.upload_input).grid(row=0, column=0, padx=10, pady=5)
         tk.Button(root, text="Upload price.txt", command=self.upload_price).grid(row=0, column=1, padx=10, pady=5)
         tk.Button(root, text="Upload promotions.txt", command=self.upload_promo).grid(row=0, column=2, padx=10, pady=5)
         tk.Button(root, text="Parse Files", command=self.parse_files).grid(row=0, column=3, padx=10, pady=5)
         tk.Button(root, text="Run Optimization", command=self.run_optim).grid(row=0, column=4, padx=10, pady=5)
 
-        # Output display
         self.output = scrolledtext.ScrolledText(root, width=100, height=25)
         self.output.grid(row=1, column=0, columnspan=5, padx=10, pady=10)
 
@@ -108,17 +106,16 @@ class App:
 
             best_cost, used_promos, remaining_items, remaining_cost = minimize_cost(shopping, prices, promotions)
 
-            self.output.insert(tk.END, "\n--- Purchase Summary ---\n")
             self.output.insert(tk.END, "Shopping List:\n")
             for item_id, qty in shopping.items():
-                self.output.insert(tk.END, f"- Item {item_id} (Qty: {qty}, Unit Price: {prices[item_id]})\n")
+                self.output.insert(tk.END, f"   Item {item_id} (Qty: {qty}, Unit Price: {prices[item_id]})\n")
 
             if used_promos:
                 self.output.insert(tk.END, "\nPromotions Applied:\n")
                 for promo in used_promos:
                     promo_str = ' + '.join(f"{v}×{k}" for k, v in promo.items())
                     price = next(p['price'] for p in promotions if p['items'] == promo)
-                    self.output.insert(tk.END, f"- [{promo_str}] → ${price}\n")
+                    self.output.insert(tk.END, f" {promo_str} @ ${price}\n")
             else:
                 self.output.insert(tk.END, "\nNo promotions applied.\n")
 
@@ -126,11 +123,10 @@ class App:
                 self.output.insert(tk.END, "\nItems Remaining:\n")
                 for item_id, qty in remaining_items.items():
                     unit = prices[item_id]
-                    self.output.insert(tk.END, f"- {qty} × Item {item_id} @ ${unit} = ${qty * unit}\n")
+                    self.output.insert(tk.END, f"   {qty} × Item {item_id} @ ${unit} = ${qty * unit}\n")
 
             self.output.insert(tk.END, f"\nTotal Optimal Cost: ${best_cost:.2f}\n")
 
-            # Save to output.txt
             # Save to output.txt
             with open("output.txt", "w", encoding="utf-8") as f:
                 f.write(f"Total Optimal Cost: ${best_cost:.2f}\n")
@@ -147,12 +143,12 @@ class App:
                         f.write(f"- {qty} × Item {item_id} @ ${unit} = ${qty * unit}\n")
 
 
-            self.output.insert(tk.END, " data stored in output.txt\n")
+            self.output.insert(tk.END, "\ndata stored in output.txt\n")
 
         except Exception as e:
             messagebox.showerror("Error", f"Optimization failed:\n{e}")
 
-# --- Launch the UI ---
+# start ui
 if __name__ == "__main__":
     root = tk.Tk()
     app = App(root)

@@ -1,5 +1,3 @@
-# optimizer.py
-
 def minimize_cost(shopping_list, prices, promotions):
     item_ids = sorted(shopping_list.keys())
     init_state = tuple(shopping_list[i] for i in item_ids)
@@ -42,6 +40,6 @@ def minimize_cost(shopping_list, prices, promotions):
 
     total_cost, promos_used, final_state = dp(init_state)
 
-    # Reconstruct remaining items
+    # put together remaining items
     remaining = {i: q for i, q in zip(item_ids, final_state) if q > 0}
     return total_cost, promos_used, remaining, sum(prices[i] * q for i, q in remaining.items())
