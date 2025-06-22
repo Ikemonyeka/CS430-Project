@@ -42,4 +42,6 @@ def minimize_cost(shopping_list, prices, promotions):
 
     # put together remaining items
     remaining = {i: q for i, q in zip(item_ids, final_state) if q > 0}
-    return total_cost, promos_used, remaining, sum(prices[i] * q for i, q in remaining.items())
+    remaining_cost = sum(prices[i] * q for i, q in remaining.items())
+    
+    return total_cost, promos_used[::-1], remaining, remaining_cost
