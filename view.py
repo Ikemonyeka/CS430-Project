@@ -64,15 +64,15 @@ class App:
 
     def upload_input(self):
         self.input_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
-        self.output.insert(tk.END, f"[✔] Selected input.txt: {self.input_path}\n")
+        self.output.insert(tk.END, f"Selected input.txt: {self.input_path}\n")
 
     def upload_price(self):
         self.price_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
-        self.output.insert(tk.END, f"[✔] Selected price.txt: {self.price_path}\n")
+        self.output.insert(tk.END, f"Selected price.txt: {self.price_path}\n")
 
     def upload_promo(self):
         self.promo_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
-        self.output.insert(tk.END, f"[✔] Selected promotions.txt: {self.promo_path}\n")
+        self.output.insert(tk.END, f"Selected promotions.txt: {self.promo_path}\n")
 
     def parse_files(self):
         if not (self.input_path and self.price_path and self.promo_path):
