@@ -10,8 +10,6 @@ To start the application run:
 Running Environment & Instructions
 Environment
 - Language: Python 3
-- Interface: Tkinter GUI
- 
 
 How to Run the Application
 1. Open a terminal.
