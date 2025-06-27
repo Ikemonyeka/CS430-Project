@@ -7,8 +7,7 @@ To start the application run:
 -Run the optimization algorithm after by clicking 'Run Optimization' this will display the output on the ui and also save it to the output.txt file located in {YOUR FILE PATH}\CS430-PROJECT
 
 
-Running Environment & Instructions
-Environment
+Running & Instructions Environment
 - Language: Python 3
 
 How to Run the Application
