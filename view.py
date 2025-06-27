@@ -135,7 +135,7 @@ class App:
                     for promo in used_promos:
                         promo_str = ' + '.join(f"{v}×{k}" for k, v in promo.items())
                         price = next(p['price'] for p in promotions if p['items'] == promo)
-                        f.write(f"- [{promo_str}] → ${price}\n")
+                        f.write(f"- [{promo_str}] = ${price}\n")
                 if remaining_items:
                     f.write("Remaining Items:\n")
                     for item_id, qty in remaining_items.items():
