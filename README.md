@@ -1,7 +1,6 @@
 Auxiliary Document
 Running Environment & Instructions
 
-
 This application was done using Python. The program can be run by executing view.py, which launches the ui allowing uploads for three input files: input.txt, price.txt, and promotions.txt, after parsing the data, pressing the Run Optimization button runs the optimization algorithm and displays the result in the interface and also saves a version to output.txt.
 
 How to Run the Application:
