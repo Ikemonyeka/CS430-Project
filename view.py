@@ -113,7 +113,7 @@ class App:
             if used_promos:
                 self.output.insert(tk.END, "\nPromotions Applied:\n")
                 for promo in used_promos:
-                    promo_str = ' + '.join(f"{v}×{k}" for k, v in promo.items())
+                    promo_str = ' + '.join(f"{v}x{k}" for k, v in promo.items())
                     price = next(p['price'] for p in promotions if p['items'] == promo)
                     self.output.insert(tk.END, f" {promo_str} @ ${price}\n")
             else:
@@ -123,7 +123,7 @@ class App:
                 self.output.insert(tk.END, "\nItems Remaining:\n")
                 for item_id, qty in remaining_items.items():
                     unit = prices[item_id]
-                    self.output.insert(tk.END, f"   {qty} × Item {item_id} @ ${unit} = ${qty * unit}\n")
+                    self.output.insert(tk.END, f"   {qty} x Item {item_id} @ ${unit} = ${qty * unit}\n")
 
             self.output.insert(tk.END, f"\nTotal Optimal Cost: ${best_cost:.2f}\n")
 
@@ -133,14 +133,14 @@ class App:
                 if used_promos:
                     f.write("Promotions Applied:\n")
                     for promo in used_promos:
-                        promo_str = ' + '.join(f"{v}×{k}" for k, v in promo.items())
+                        promo_str = ' + '.join(f"{v}x{k}" for k, v in promo.items())
                         price = next(p['price'] for p in promotions if p['items'] == promo)
                         f.write(f"- [{promo_str}] = ${price}\n")
                 if remaining_items:
                     f.write("Remaining Items:\n")
                     for item_id, qty in remaining_items.items():
                         unit = prices[item_id]
-                        f.write(f"- {qty} × Item {item_id} @ ${unit} = ${qty * unit}\n")
+                        f.write(f"- {qty} x Item {item_id} @ ${unit} = ${qty * unit}\n")
 
 
             self.output.insert(tk.END, "\ndata stored in output.txt\n")

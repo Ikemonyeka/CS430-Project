@@ -1,7 +1,29 @@
-def minimize_cost(shopping_list, prices, promotions):
-    item_ids = sorted(shopping_list.keys())
-    init_state = tuple(shopping_list[i] for i in item_ids)
+def merge_sort(lst):
+    if len(lst) <= 1:
+        return lst
+    mid = len(lst) // 2
+    left = merge_sort(lst[:mid])
+    right = merge_sort(lst[mid:])
+    return merge(left, right)
 
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+
+def minimize_cost(shopping_list, prices, promotions):
+    item_ids = merge_sort(list(shopping_list.keys()))
+    init_state = tuple(shopping_list[i] for i in item_ids)
     promo_vectors = []
     for promo in promotions:
         vec = tuple(promo['items'].get(i, 0) for i in item_ids)
